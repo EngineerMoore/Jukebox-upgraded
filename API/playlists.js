@@ -19,7 +19,7 @@ router.get("/", authenticate, async (req, res, next) => {
 });
 
 router.post("/", authenticate, async (req, res, next) => {
-  const { name, description, ownerId, trackIds } = req.body;
+  const { name, description, ownerId } = req.body;
 
   const inputValidation = (field, dataType) => {
     if (!field) { 
@@ -30,20 +30,19 @@ router.post("/", authenticate, async (req, res, next) => {
     }
   }
 
-  inputValidation(name, 'String');
-  inputValidation(description, 'String');
-  inputValidation(ownerId, `Int`);
-  inputValidation(trackIds, `[Int,...]`);
+  inputValidation(`name`, 'String');
+  inputValidation(`description`, 'String');
+  inputValidation(`ownerId`, `Int`);
 
-  const addedSongs = trackIds.map((id) => ({ id }))
+  // const addedSongs = trackIds.map((id) => ({ id }))
 
   try {
    const newPlaylist = await prisma.playlist.create({
      data: {
        name,
        description,
-       owner: req.user.id,
-       tracks: { connect: addedSongs }
+       ownerId: req.user.id,
+      //  tracks: { connect: addedSongs }
      }
    });
    res.status(201).json(newPlaylist)
