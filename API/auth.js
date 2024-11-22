@@ -8,10 +8,14 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 // jwt.sign creates a token w/ id = payload and JWT_SECRET = key
 const createToken = (id) => {
-  return jwt.sign({ id }, JWT_SECRET, {expiresIn: "1 d"});
+  return jwt.sign({ id }, JWT_SECRET, {expiresIn: "1d"});
 };
 
 router.use( async(req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader?.slice(7);//"Bearer <token>"
+if (!token) return next();
+
   try{
     const { id } =  jwt.verify(token, JWT_SECRET);
     const user = await prisma.user.findUniqueOrThrow({ where: { id }, });

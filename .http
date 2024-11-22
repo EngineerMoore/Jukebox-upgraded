@@ -1,3 +1,23 @@
 @PORT = 3000
-@host = http:/localhost::{{PORT}}
+@host = http://localhost:{{PORT}}
 
+###
+GET {{host}}/
+
+###
+POST {{host}}/signUp
+Content-Type: application/json
+
+{
+  "username": "newuser1",
+  "password": "password1"
+}
+
+###
+POST {{host}}/login
+
+###
+GET {{host}}/playlists
+
+###
+POST {{host}}/playlists

@@ -6,6 +6,7 @@ const seed = async (numUsers = 3, numTracks = 20, numPlaylists = 7) => {
 
   const users = Array.from({ length: numUsers }, () => ({
     username: faker.internet.username(),
+    password: faker.internet.password(),
   }));
   await prisma.user.createMany({ data: users })
 
