@@ -40,3 +40,14 @@ Authorization: Bearer {{token}}
   "description": "Will have you dancing all night",
   "ownerId": 14
 }
+
+###
+GET {{host}}/tracks
+
+###
+GET {{host}}/tracks/1
+
+###
+GET {{host}}/tracks/9
+Authorization: Bearer {{token}}
+
