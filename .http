@@ -1,0 +1,53 @@
+@PORT = 3000
+@host = http://localhost:{{PORT}}
+
+###
+GET {{host}}/
+
+###
+POST {{host}}/signUp
+Content-Type: application/json
+
+{
+  "username": "newuser3",
+  "password": "password3"
+}
+
+
+### at login allows me to make the reference where token is declared
+# @name login
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "username": "newuser3",
+  "password": "password3"
+}
+
+### 
+@token = {{login.response.body.token}}
+GET {{host}}/playlists
+Authorization: Bearer {{token}}
+
+
+###
+POST {{host}}/playlists
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Dance Revolution",
+  "description": "Will have you dancing all night",
+  "ownerId": 14
+}
+
+###
+GET {{host}}/tracks
+
+###
+GET {{host}}/tracks/1
+
+###
+GET {{host}}/tracks/9
+Authorization: Bearer {{token}}
+
