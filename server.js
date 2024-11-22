@@ -15,11 +15,12 @@ app.get(`/`, (req, res, next) => {
 
 app.use(require(`./API/auth.js`).router);
  
-app.use("/playlists", require("./API/playlists.js"))
+app.use("/playlists", require("./API/playlists.js"));
 
+app.use("/tracks", require("./API/tracks.js"));
 
 app.use((req, res, next) => {
-  next({status: 404, message: `Endpoint not found`})
+  next({status: 404, message: `Endpoint not found`});
 })
 
 app.use((e, req, res, next) => {
@@ -30,5 +31,5 @@ app.use((e, req, res, next) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`You are now listening on port ${PORT}`)
+  console.log(`You are now listening on port ${PORT}`);
 })
