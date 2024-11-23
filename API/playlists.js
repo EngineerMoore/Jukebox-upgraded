@@ -50,3 +50,23 @@ router.post("/", authenticate, async (req, res, next) => {
    next(e);
   }
 })
+
+
+router.get("/:id", authenticate, async (req, res, next) => {
+  const { id } = req.params;
+
+  try{
+    const playlist = await prisma.playlist.findUnique({
+      where: { id: +id, ownerId: req.user.id }, include: { tracks: true }
+    });
+
+    if (!playlist){
+      next({ status: 403, message: `Access denied. Please login with the correct credentials.`})
+    };
+
+    res.json(playlist);
+  } catch (e) {
+    next(e);
+  }
+
+})

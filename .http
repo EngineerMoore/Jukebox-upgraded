@@ -41,6 +41,12 @@ Authorization: Bearer {{token}}
   "ownerId": 14
 }
 
+
+###
+GET {{host}}/playlists/9
+Authorization: Bearer {{token}}
+
+
 ###
 GET {{host}}/tracks
 
@@ -51,3 +57,18 @@ GET {{host}}/tracks/1
 GET {{host}}/tracks/9
 Authorization: Bearer {{token}}
 
+###
+POST {{host}}/playlists
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Bomdabom-bom",
+  "description": "Base dropped beatz",
+  "ownerId": 14
+}
+
+
+###
+GET {{host}}/playlists/1
+Authorization: Bearer {{token}}
