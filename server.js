@@ -10,7 +10,6 @@ app.use(require(`morgan`)(`dev`))
 
 app.get(`/`, (req, res, next) => {
   res.send(`Welcome to the Jukebox-Pro API`);
-  next();
 })
 
 app.use(require(`./API/auth.js`).router);
